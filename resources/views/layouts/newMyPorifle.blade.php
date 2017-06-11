@@ -1,6 +1,14 @@
 <!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
 <html>
 <head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 	<title>UTP Clinic E-Services System</title>
 
 	<!-- Fonts and icons -->
@@ -19,6 +27,7 @@
 	
 
 
+
 <!--Top NavBar Starts Here-->
 <div class="navbar navbar-inverse">
   <div class="container">
@@ -28,21 +37,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../newHome/index.php">Home</a> <!--Instead of home, letak nama clinic tu sbb pakai 'brand'-->
+      <a class="navbar-brand" href="newHome.blade.php">Home</a> <!--Instead of home, letak nama clinic tu sbb pakai 'brand'-->
     </div>
     <div class="navbar-collapse collapse navbar-inverse-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="../newArticles/index.php">Articles</a></li>
-        <li><a href="../newEvents/index.php">Events</a></li>
+        <li><a href="newArticles.blade.php">Articles</a></li>
+        <li><a href="newEvents.blade.php">Events</a></li> <!--ni dh tukar location utk laravvel but xsure boleh masuk x-->
         <li class="dropdown">
           <a href="bootstrap-elements.php" data-target="#" class="dropdown-toggle" data-toggle="dropdown">UTP Clinic e-Services
-            <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="../newAppointment/index.php">Appointment</a></li>
-            <li><a href="../newMCAlert/index.php">MC Alert</a></li>
+            <li><a href="newAppointment.blade.php">Appointment</a></li>
+            <li><a href="newMCAlert.blade.php">MC Alert</a></li>
             <li class="divider"></li>
             <li class="dropdown-header">Other Services</li>
-            <li><a href="../newSeeAndAct/index.php">See and Act</a></li>
+            <li><a href="newSeeAndAct.blade.php">See and Act</a></li>
           </ul>
         </li>
       </ul>
@@ -52,16 +60,16 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right"> 
-        <li><a href="../newAboutUs/index.php">About Us</a></li>
+        <li><a href="newAboutUs.blade.php">About Us</a></li>
         <li class="dropdown">
           <a href="bootstrap-elements.php" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Account Management
             <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="../newLogin/index.php">Log In</a></li> <!--logout only appears when have logged in-->
-            <li><a class="dropdown-item" href="../newMyProfile/index.php">My Profile</a></li>
-            <li><a class="dropdown-item" href="../newSettings/index.php">Settings</a></li>
+            <li><a class="dropdown-item" href="newLogin.blade.php">Log In</a></li> <!--logout only appears when have logged in-->
+            <li><a class="dropdown-item" href="newMyProfile.blade.php">My Profile</a></li>
+            <li><a class="dropdown-item" href="newSettings.blade.php">Settings</a></li>
             <li class="divider"></li>
-            <li><a href="../newPasswordRecovery/index.php">Password Recovery</a></li>
+            <li><a href="newPasswordRecovery.blade.php">Password Recovery</a></li>
           </ul>
         </li>
       </ul>
@@ -70,14 +78,12 @@
 </div>
 <!--end of Top Navbar-->
 
-
-
 <!--landing page starts here-->
 <body class="profile-page">
 	
 
 
-	<div class="page-header header-filter" data-parallax="active" style="background-image: url('klinikredzalogo.jpg');"></div>
+	<div class="page-header header-filter" data-parallax="active" style="background-image: url('meow.jpg');"></div>
 	<div class="main main-raised">
 		<div class="profile-content">
             <div class="container">
@@ -85,11 +91,11 @@
 	                <div class="col-xs-6 col-xs-offset-3">
         	           <div class="profile">
 	                        <div class="avatar">
-	                            <img src="meow.jpg" alt="Circle Image" class="img-circle img-responsive img-raised">
+	                            <img src="qayyum.jpg" alt="Circle Image" class="img-circle img-responsive img-raised">
 	                        </div>
 	                        <div class="name">
-	                            <h3>You are currently logged in as:</h3>
-								<h6 class="title">Clinic Admin</h6>
+	                            <h3 class="title">Qayyum Marzalan</h3>
+								<h6>Musician, Businessman, Student</h6>
 								<hr>
 	                        </div>
 	                    </div>
@@ -103,7 +109,9 @@
 
                 <!--Profile Description Starts-->
                 <div class="description text-center">
-                    <p>Kindly click on the tabs below to manage them:</p>
+                    <p>form: username</p>
+                    <p>form: password</p>
+                    <p>form: next-of-kin details? maybe</p>
                 </div><!--Profile Description Ends-->
 
 				<div class="row">
@@ -114,19 +122,19 @@
 									<li class="active">
 			                            <a href="#appointment" role="tab" data-toggle="tab">
 											<i class="material-icons">assignment</i>
-											Appointment <br>Mgmt.
+											Appointment <br>Status
 			                            </a>
 			                        </li>
 			                        <li>
 			                            <a href="#mcstatus" role="tab" data-toggle="tab">
 											<i class="material-icons">camera</i>
-			                                MC </br>Mgmt.
+			                                MC </br>Status
 			                            </a>
 			                        </li>
                                     <li>
 										<a href="#seeandactstatus" role="tab" data-toggle="tab">
 											<i class="material-icons">people</i>
-											See and Act </br>Mgmt.
+											See and Act </br>Status
 										</a>
 									</li>
 
@@ -334,5 +342,8 @@
 
 	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
 	<script src="material-kit.js" type="text/javascript"></script>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
