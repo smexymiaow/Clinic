@@ -20,8 +20,8 @@
 	    								</a>
 	    								
 	    							</div>
-</div>
 
+</div>
 
 <!--Colours Panels Start Here-->
 <!--For Quick Links, Make that when they click the link, Login box will popout then quickly take them there-->
