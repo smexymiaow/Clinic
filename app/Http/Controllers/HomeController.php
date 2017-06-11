@@ -21,8 +21,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function aboutus()
     {
-        return view('home');
+        return view('wtf.aboutus');
     }
+
+    /*
+    *
+    *   Changes for Index
+    *   Description :   
+    *   Last edited by : Firdausneonexxa
+    *
+    */
+        
+    public function home (Request $request){
+        return view('wtf.home');
+    }
+        
 }
