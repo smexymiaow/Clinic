@@ -5,21 +5,35 @@
 
 
 <div class="subscribe-line subscribe-line-image" style="background-image: url('books.jpg');">
-	<div class="container">
-	    <div class="row">
-	        <div class="col-md-6 col-md-offset-3">
-	        	<div class="text-center">
-					<h3 class="title">Searching for an article?</h3>
-					<p class="description">Let us assist to find you the article by typing the keyword in the space provided below:</p>
-	        	</div>
-	        	<div class="card card-raised card-form-horizontal">
-	        		<div class="content">
-	        			<form method="" action="">
-	        				<div class="row">
-	        					<div class="col-sm-8">
-									<div class="input-group">
-	        							<span class="input-group-addon"><i class="material-icons">search</i></span>
-	        							<input type="email" value="" placeholder="Enter a keyword here" class="form-control" />
+	        		<div class="container">
+	        			<div class="row">
+	        				<div class="col-md-6 col-md-offset-3">
+	        					<div class="text-center">
+	        						<h3 class="title">Searching for an article?</h3>
+	        						<p class="description">
+	        							 Let us assist to find you the article by typing the keyword in the space provided below:
+	        						</p>
+	        					</div>
+
+	        					<div class="card card-raised card-form-horizontal">
+	        						<div class="content">
+	        							<form method="" action="">
+	        								<div class="row">
+	        									<div class="col-sm-8">
+
+	        										<div class="input-group">
+	        											<span class="input-group-addon">
+	        												<i class="material-icons">search</i>
+	        											</span>
+	        											<input type="email" value="" placeholder="Enter a keyword here" class="form-control" />
+	        										</div>
+	        									</div>
+	        									<div class="col-sm-4">
+	        										<button type="button" class="btn btn-primary btn-block">Search</button>
+	        									</div>
+	        								</div>
+	        							</form>
+>>>>>>> Stashed changes
 	        						</div>
 	        					</div>
 	        					<div class="col-sm-4">
