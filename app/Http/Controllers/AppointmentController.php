@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Appointment;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Auth;
 
 class AppointmentController extends Controller
 {
@@ -35,7 +37,21 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $parameters = $request->all();
+        $appointment = new Appointment;
+        $date = Carbon::parse($parameters['booking_date']);
+        $booking_date = Carbon::createFromDate($date->year,$date->month,$date->day);
+
+        $appointment->booking_date      = $booking_date->toDateTimeString();
+        $appointment->booking_time      = $parameters['booking_time'];
+        $appointment->booking_symptom   = $parameters['booking_symptom'];
+        $appointment->user_id           = Auth::user()->id;
+
+        $appointment->save();
+
+        return redirect()->route('app');
+
     }
 
     /**

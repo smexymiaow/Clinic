@@ -12,9 +12,10 @@
 	                <div class="col-xs-6 col-xs-offset-3">
         	           <div class="profile">
 	                        <div class="avatar">
-	                            <img src="qayyum.jpg" alt="Circle Image" class="img-circle img-responsive img-raised">
+	                            <img src="{{ asset('images/leona.jpg') }}" alt="Circle Image" class="img-responsive img-raised" style="border-radius:15px">
 	                        </div>
 	                        <div class="name">
+	                        	<br>
 	                            <h3 class="title">Qayyum Marzalan</h3>
 								<h6>Musician, Businessman, Student</h6>
 								<hr>
@@ -28,12 +29,12 @@
 	                </div>
                 </div>
 
-                <!--Profile Description Starts-->
+               {{--  <!--Profile Description Starts-->
                 <div class="description text-center">
                     <p>form: username</p>
                     <p>form: password</p>
                     <p>form: next-of-kin details? maybe</p>
-                </div><!--Profile Description Ends-->
+                </div><!--Profile Description Ends--> --}}
 
 				<div class="row">
 					<div class="col-md-6 col-md-offset-3">
@@ -74,7 +75,7 @@
 			        <div class="tab-pane active work" id="appointment">
 				        <!--Content for id appointment starts here-->
 
-				        			<p style="text-align: center;">You have no upcoming appointment/ you have a doctor appointment in (time)</p>
+				        			<p style="text-align: center;">You have no upcoming appointment you have a doctor appointment in (time)</p>
 				        			<p style="text-align: center;">your appointment booking is being reviewed/has been approved</p>
 				        			<p style="text-align: center;">buat option utk reschedule, but then kena tunggu approval again from the doc</p>
 

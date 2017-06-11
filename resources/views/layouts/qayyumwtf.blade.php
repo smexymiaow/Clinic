@@ -6,6 +6,8 @@
 	<!-- Fonts and icons -->
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
 	
 	<!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -24,22 +26,20 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="../newHome/index.php">Home</a> <!--Instead of home, letak nama clinic tu sbb pakai 'brand'-->
+			<a class="navbar-brand" href="{{ route('home') }}">Home</a> <!--Instead of home, letak nama clinic tu sbb pakai 'brand'-->
 	    </div>
 	    <div class="navbar-collapse collapse navbar-inverse-collapse">
 	      	<ul class="nav navbar-nav">
-	        	<li><a href="../newArticles/index.php">Articles</a>
-	        	</li>
-	        	<li><a href="../newEvents/index.php">Events</a>
-	        	</li>
+	        	<li><a href="{{ route('articles') }}">Articles</a></li>
+	        	<li><a href="{{ route('events') }}">Events</a></li>
 	        	<li class="dropdown">
 	        		<a href="bootstrap-elements.php" data-target="#" class="dropdown-toggle" data-toggle="dropdown">UTP Clinic e-Services<b class="caret"></b></a>
 		          	<ul class="dropdown-menu">
-		            	<li><a href="../newAppointment/index.php">Appointment</a></li>
-		            	<li><a href="../newMCAlert/index.php">MC Alert</a></li>
+		            	<li><a href="{{ route('app') }}">Appointment</a></li>
+		            	<li><a href="{{ route('mcalert') }}">MC Alert</a></li>
 		            	<li class="divider"></li>
 		            	<li class="dropdown-header">Other Services</li>
-		            	<li><a href="../newSeeAndAct/index.php">See and Act</a></li>
+		            	<li><a href="{{ route('seenact') }}">See and Act</a></li>
 		          	</ul>
 	        	</li>
 	      	</ul>
@@ -49,17 +49,32 @@
 					</div>
 				</form>
 	      	<ul class="nav navbar-nav navbar-right"> 
-	        	<li><a href="../newAboutUs/index.php">About Us</a></li>
-	        	<li class="dropdown">
-	        		<a href="bootstrap-elements.php" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Account Management<b class="caret"></b></a>
-	          		<ul class="dropdown-menu">
-	          		  	<li><a class="dropdown-item" href="../newLogin/index.php">Log In</a></li> <!--logout only appears when have logged in-->
-	          		  	<li><a class="dropdown-item" href="../newMyProfile/index.php">My Profile</a></li>
-	          		  	<li><a class="dropdown-item" href="../newSettings/index.php">Settings</a></li>
-	          		  	<li class="divider"></li>
-	          		  	<li><a href="../newPasswordRecovery/index.php">Password Recovery</a></li>
-	          		</ul>
-	        	</li>
+	        	<li><a href="{{ route('aboutus') }}">About Us</a></li>
+        		@if (Auth::guest())
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
+                @else
+                	<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                            	<a href="{{ route('profile') }}">
+                                    <i class="material-icons">accessibility</i> Profile
+                                </a>
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    <i class="material-icons">input</i> Logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+          		@endif
 	      	</ul>
 	    </div>
 	</div>
@@ -95,5 +110,11 @@
 	<script src="{{ asset('js/jquery.tagsinput.js') }}"></script>
 	<script src="{{ asset('js/jasny-bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/material-kit.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+	<script>
+		$('.datepicker').datepicker({
+			weekStart:1
+		});
+	</script>
 </body>
 </html>

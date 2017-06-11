@@ -1,8 +1,5 @@
 @extends('layouts.qayyumwtf')
 @section('content')
-
-<!--landing page starts here-->
-<body class="landing-page">
     <div class="page-header header-filter" data-parallax="active" style="background-image: url('utp ch.jpg');">
         <div class="container">
             <div class="row">
@@ -15,14 +12,11 @@
                     	<li style="padding-left: 30px">MC Alert</li>
                     	<li style="padding-left: 30px">See and Act</li>
                     <br />
-                    <a href="#" class="btn btn-danger btn-raised btn-lg">
-						<i class="glyphicon-chevron-right"></i> Learn More
-					</a>
+                    <a href="#" class="btn btn-danger btn-raised btn-lg"><i class="glyphicon-chevron-right"></i> Learn More</a>
 				</div>
             </div>
         </div>
     </div>
-
 	<div class="main main-raised">
 		<div class="container">
 	    	<div class="section text-center">
@@ -38,30 +32,38 @@
                     <div class="col-md-8 col-md-offset-2">
                         <h2 class="text-center title">Set Your Appointment Details</h2>
 						<h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
-                        <form class="contact-form">
+                        <form class="contact-form" action="{{ route('appointment.store') }}" method="POST">
+                            {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6">
 									<div class="form-group label-floating">
-										<label class="control-label">Select date</label>
-										<input type="email" class="form-control">
-									</div>
+                                        <label class="control-label">Select date</label><!-- markup -->
+                                        <input class="datepicker form-control" type="text" name="booking_date">
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
 									<div class="form-group label-floating">
-										<label class="control-label">Select time</label>
-										<input type="email" class="form-control">
-									</div>
+                                        <label class="control-label">Select time</label>
+                                        <select class="selectpicker" name="booking_time">
+                                            <option value="8AM">8AM</option>
+                                            <option value="9AM">9AM</option>
+                                            <option value="10AM">10AM</option>
+                                            <option value="11AM">11AM</option>
+                                            <option value="12PM">12PM</option>
+                                            <option value="1PM">1PM</option>
+                                            <option value="2PM">2PM</option>
+                                            <option value="3PM">3PM</option>
+                                            <option value="4PM">4PM</option>
+                                            <option value="5PM">5PM</option>
+                                            <option value="6PM">6PM</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-							<div class="form-group label-floating">
-								<label class="control-label">Describe briefly your symptoms</label>
-								<textarea class="form-control" rows="4"></textarea>
-							</div>
+							<div class="form-group label-floating"><label class="control-label">Describe briefly your symptoms</label><textarea class="form-control" rows="4" name="booking_symptom"></textarea></div>
                             <div class="row"> <!--Button Starts-->
                                 <div class="col-md-4 col-md-offset-4 text-center">
-                                    <button class="btn btn-primary btn-raised" >
-										Submit
-									</button>
+                                    <button class="btn btn-primary btn-raised" type="Submit">Submit</button>
                                 </div>
                             </div><!--Button Ends-->
                         </form>
