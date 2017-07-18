@@ -14,7 +14,7 @@
                         {{-- name --}}
                         <div class="input-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <span class="input-group-addon"><i class="material-icons">account_box</i></span>
-                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="wtf is my name" required autofocus>
+                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name" required autofocus>
                             @if ($errors->has('name'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('name') }}</strong>
@@ -25,10 +25,21 @@
                         {{-- email --}}
                         <div class="input-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <span class="input-group-addon"><i class="material-icons">face</i></span>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"  placeholder="wtf is my email" required autofocus>
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"  placeholder="Email Address qayyum@qayyum.qayyum" required autofocus>
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        {{-- matric --}}
+                        <div class="input-group{{ $errors->has('matric_id') ? ' has-error' : '' }}">
+                            <span class="input-group-addon"><i class="material-icons">account_box</i></span>
+                            <input id="matric_id" type="text" class="form-control" name="matric_id" value="{{ old('matric_id') }}" placeholder="Matric ID 19999" required autofocus>
+                            @if ($errors->has('matric_id'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('matric_id') }}</strong>
                                 </span>
                             @endif
                         </div>
@@ -36,7 +47,7 @@
                         {{-- password --}}
                         <div class="input-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <span class="input-group-addon"><i class="material-icons">lock_outline</i></span>
-                            <input id="password" type="password" class="form-control" name="password" required>
+                            <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -47,7 +58,7 @@
                         {{-- confirm password --}}
                         <div class="input-group">
                             <span class="input-group-addon"><i class="material-icons">lock</i></span>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Password one more time" required>
                         </div>
                     </div>
                     

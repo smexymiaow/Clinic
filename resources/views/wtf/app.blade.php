@@ -27,18 +27,20 @@
                     </div>
                 </div>
             </div>
+            @if($doneappointment)
         	<div class="section section-contacts">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <h2 class="text-center title">Set Your Appointment Details</h2>
 						<h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
-                        <form class="contact-form" action="{{ route('appointment.store') }}" method="POST">
-                            {{ csrf_field() }}
+                        {!! Form::open(['route' => 'appointment.store', 'id' => 'mcpunyeform','class'=>'contact-form']) !!}
+                            
                             <div class="row">
                                 <div class="col-md-6">
 									<div class="form-group label-floating">
-                                        <label class="control-label">Select date</label><!-- markup -->
-                                        <input class="datepicker form-control" type="text" name="booking_date">
+                                        <label class="control-label"></label><!-- markup -->
+                                        {{ Form::label('booking_date', 'Select date', ['class' => 'control-label']) }}
+                                        {{ Form::date('booking_date', Null,['class' => 'form-control']) }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -70,6 +72,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
 	</div>
 @endsection

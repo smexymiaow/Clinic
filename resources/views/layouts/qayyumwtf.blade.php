@@ -99,6 +99,8 @@
 	        </ul>
 		</div>
 	</footer> <!--Footer ends here-->
+{{-- modal for mc --}}
+@include('wtf.modalmc')
 
 	<!--   Core JS Files   -->
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -115,6 +117,13 @@
 		$('.datepicker').datepicker({
 			weekStart:1
 		});
+		
+		// for form submission
+		$('.submitmcpunyeform').click(function () {
+			$('#mcpunyeform').submit();	
+		});
+		
+                
 	</script>
 </body>
 </html>

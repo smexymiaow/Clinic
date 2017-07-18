@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Appointment;
+use Carbon\Carbon;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -64,7 +67,9 @@ class HomeController extends Controller
         
     public function app (Request $request){
         $parameters = $request->all();
-        return view('wtf.app');
+        $has_appointment = Appointment::where('user_id',Auth::user()->id)->whereDate('booking_date', '>', Carbon::today()->toDateString())->get();
+        $doneappointment = $has_appointment->isEmpty();
+        return view('wtf.app',compact('doneappointment'));
     }
         
     /**

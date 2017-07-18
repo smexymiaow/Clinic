@@ -1,3 +1,7 @@
 .qayyum-suke-max {
 	width:100%;
 }
+
+.modal-backdrop {
+  z-index: 999; // was 1040
+}

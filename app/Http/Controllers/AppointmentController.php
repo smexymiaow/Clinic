@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Appointment;
+use App\Session;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -50,6 +51,10 @@ class AppointmentController extends Controller
 
         $appointment->save();
 
+        $sessions = new Session;
+        $sessions->approval = 0;
+        $sessions->appointment_id = $appointment->id;
+        $sessions->save();
         return redirect()->route('app');
 
     }
@@ -94,8 +99,10 @@ class AppointmentController extends Controller
      * @param  \App\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Appointment $appointment)
+    public function destroy($appointment)
     {
-        //
+        $appointment = Appointment::find($appointment);
+        $appointment->delete();
+        return back();
     }
 }

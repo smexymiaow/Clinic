@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Auth::routes();
@@ -34,3 +34,4 @@ Route::get('/profile', 		'UserController@profile')			->name('profile');
 Route::resource('appointment','AppointmentController');
 Route::resource('session','SessionController');
 Route::resource('mc','MedicalCertificateController');
+Route::post('/send', 'EmailController@send');

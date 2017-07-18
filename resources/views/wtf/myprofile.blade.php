@@ -16,7 +16,7 @@
 	                        </div>
 	                        <div class="name">
 	                        	<br>
-	                            <h3 class="title">Qayyum Marzalan</h3>
+	                            <h3 class="title">{{ Auth::user()->name }}</h3>
 								<h6>Musician, Businessman, Student</h6>
 								<hr>
 	                        </div>
@@ -74,11 +74,73 @@
 
 			        <div class="tab-pane active work" id="appointment">
 				        <!--Content for id appointment starts here-->
+				        @if($isadmin == true)
+							<div class="row">
+	            				<div class="row">
+			                    	<div class="col-md-8 col-md-offset-2">
+			                    	    <div class="table-responsive">
+			                    	    <table class="table">
+			                            <thead>
+			                                <tr>
+			                                    <th class="text-center">Student Name</th>
+			                                    <th>Symptom</th>
+			                                    <th>Date</th>
+			                                    <th>Time</th>
+			                                  	<th class="text-center">Actions</th>
+			                                </tr>
+			                            </thead>
+			                            <tbody>
+			                            	@foreach($unapprovedapp as $pending_appointment)
+			                                <tr>
+			                                    <td class="text-center">{{ \App\User::where('id',$pending_appointment->user_id)->value('name') }}</td>
+			                                    <td>{{ $pending_appointment->booking_symptom }}</td>
+			                                    <td>{{ $pending_appointment->booking_date }}</td>
+			                                    <td>{{ $pending_appointment->booking_time }}</td>
+			                                    <td class="td-actions">
 
+			                                    	@if(!$pending_appointment->sesi_app)
+			                                    	{!! Form::model($pending_appointment, ['route' => ['appointment.destroy', $pending_appointment->id], 'method' => 'DELETE','class'=>'col-md-6']) !!} 
+			                                    	<button type="submit" rel="tooltip" class="btn btn-warning" title="Hate It">
+			                                            Reject
+			                                        </button>
+			                                        {!! Form::close() !!}
+			                                        {!! Form::model($pending_appointment, ['route' => ['session.update', $pending_appointment->sesi_id], 'method' => 'put','class'=>'col-md-6']) !!} 
+				                                        <button type="submit" rel="tooltip" class="btn btn-info" title="Approve It">
+				                                            Approve
+				                                        </button>
+			                                        {!! Form::close() !!}
+			                                        @else
+			                                        Approved
+			                                        @endif
+			                                    </td>
+			                                </tr>	
+			                                @endforeach                               
+			                            </tbody>
+			                    	    </table>
+			                    	    </div>
+									</div>
+								</div>
+							</div>
+				        @else
+								@if($has_appointment==NULL)
 				        			<p style="text-align: center;">You have no upcoming appointment you have a doctor appointment in (time)</p>
-				        			<p style="text-align: center;">your appointment booking is being reviewed/has been approved</p>
-				        			<p style="text-align: center;">buat option utk reschedule, but then kena tunggu approval again from the doc</p>
+				        		@else
+				        			@if(!$has_approved)
+				        				<p style="text-align: center;">Your appointment booking is being reviewed</p>
+				        			@else
+				        				<p style="text-align: center;">Your appointment has been approved</p>
+				        				<p style="text-align: center;">
+				        					Date : <span style="color: red">{{$client_app_det['Date']}}</span>
+				        					
+				        				</p>
+				        				<p style="text-align: center;">
+				        					Time : <span style="color: red">{{$client_app_det['Time']}}</span>
+				        				</p>
 
+
+				        			@endif
+				        		@endif
+						@endif
 				        <!--Content for id appointment ends here-->
 			        </div>
 			    
@@ -86,11 +148,23 @@
 
 
                     <div class="tab-pane connections" id="mcstatus">
-                       <div class="row">
+                    	@if($isadmin == true)
+                    	<div class="row">
             				<div class="row">
-		                    <div class="col-md-8 col-md-offset-2">
-		                        <div class="table-responsive">
-		                        <table class="table">
+		                    	<div class="col-md-8 col-md-offset-2">
+		                    		<!-- Button trigger modal -->
+                    				<button type="button" rel="tooltip" class="btn btn-info" title="Sent new MC" data-toggle="modal" data-target="#mcformmodal">Send MC </button>
+								</div>
+							</div>
+						</div>
+
+						{{-- list of all mc --}}
+						{{-- {{ $listofmc->links() }} --}}
+						<div class="row">
+            				<div class="row">
+		                    	<div class="col-md-8 col-md-offset-2">
+		                    	    <div class="table-responsive">
+		                    	    <table class="table">
 		                            <thead>
 		                                <tr>
 		                                    <th class="text-center">MC ID</th>
@@ -100,78 +174,87 @@
 		                                </tr>
 		                            </thead>
 		                            <tbody>
-		                                <tr>
-		                                    <td class="text-center">0001</td>
-		                                    <td>Fever</td>
-		                                    <td>dd/mm/yy</td>
-		                                    <td class="td-actions text-right">
-		                                    	<button type="button" rel="tooltip" class="btn btn-warning btn-round" title="Preview">
-		                                            <i class="material-icons">visibility</i>
-		                                        </button>
-		                                        <button type="button" rel="tooltip" class="btn btn-info btn-round" title="download">
-		                                            <i class="material-icons">file_download</i>
-		                                        </button>
-		                                        <button type="button" rel="tooltip" class="btn btn-success btn-round" title="share">
-		                                            <i class="material-icons">share</i>
-		                                        </button>
-		                                        <button type="button" rel="tooltip" class="btn btn-danger btn-round" title="remove">
-		                                            <i class="material-icons">close</i>
-		                                        </button>
-		                                    </td>
-		                                </tr>
-		                                <tr>
-
-		                                    <td class="text-center">0002</td>
-		                                    <td>Gum Injury</td>
-		                                    <td>dd/mm/yy</td>
-		                                    <td class="td-actions text-right">
-		                                    	<button type="button" rel="tooltip" class="btn btn-warning btn-round" title="Preview">
-		                                            <i class="material-icons">visibility</i>
-		                                        </button>
-		                                        <button type="button" rel="tooltip" class="btn btn-info btn-round" title="download">
-		                                            <i class="material-icons">file_download</i>
-		                                        </button>
-		                                        <button type="button" rel="tooltip" class="btn btn-success btn-round" title="share">
-		                                            <i class="material-icons">share</i>
-		                                        </button>
-		                                        <button type="button" rel="tooltip" class="btn btn-danger btn-round" title="remove">
-		                                            <i class="material-icons">close</i>
-		                                        </button>
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td class="text-center">0003</td>
-		                                    <td>Chicken Pox</td>
-		                                    <td>dd/mm/yy</td>
-		                                    <td class="td-actions text-right">
-		                                   		<button type="button" rel="tooltip" class="btn btn-warning btn-round" title="Preview">
-		                                            <i class="material-icons">visibility</i>
-		                                        </button>
-		                                        <button type="button" rel="tooltip" class="btn btn-info btn-round" title="download">
-		                                            <i class="material-icons">file_download</i>
-		                                        </button>
-		                                        <button type="button" rel="tooltip" class="btn btn-success btn-round" title="share">
-		                                            <i class="material-icons">share</i>
-		                                        </button>
-		                                        <button type="button" rel="tooltip" class="btn btn-danger btn-round" title="remove">
-		                                            <i class="material-icons">close</i>
-		                                        </button><!--content for id mcstatus ends here-->
-		                                    </td>
-		                                </tr>		                               
+		                            	@foreach($listofmc as $mc)
+			                                <tr>
+			                                    <td class="text-center">{{$mc->id}}</td>
+			                                    <td>{{$mc->illness}}</td>
+			                                    <td>{{$mc->created_at}}</td>
+			                                    <td class="td-actions text-right">
+			                                   		{{-- <button type="button" rel="tooltip" class="btn btn-warning btn-round" title="Preview">
+			                                            <i class="material-icons">visibility</i>
+			                                        </button> --}}
+			                                        <a href="/pdf/{{$mc->id}}.pdf" target="_blank" type="button" rel="tooltip" class="btn btn-info btn-round" title="download">
+			                                            <i class="material-icons">file_download</i>
+			                                        </a>
+			                                        <a type="button" rel="tooltip" class="btn btn-success btn-round" title="share">
+			                                            <i class="material-icons">share</i>
+			                                        </a>
+			                                        {{-- <button type="button" rel="tooltip" class="btn btn-danger btn-round" title="remove">
+			                                            <i class="material-icons">close</i>
+			                                        </button>--}}<!--content for id mcstatus ends here-->
+			                                    </td>
+			                                </tr>	
+		                               	@endforeach	                               
 		                            </tbody>
-		                        </table>
-		                        </div>
+		                    	    </table>
+		                    	    </div>
 								</div>
+							</div>
+						</div>
+
+                    	@else
+                    	
+                       <div class="row">
+            				<div class="row">
+		                    	<div class="col-md-8 col-md-offset-2">
+		                    	    <div class="table-responsive">
+		                    	    <table class="table">
+		                            <thead>
+		                                <tr>
+		                                    <th class="text-center">MC ID</th>
+		                                    <th>Illness</th>
+		                                    <th>Issuance Date</th>
+		                                  	<th class="text-right">Actions</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody>
+		                                @foreach($listofmc as $mc)
+			                                <tr>
+			                                    <td class="text-center">{{$mc->id}}</td>
+			                                    <td>{{$mc->illness}}</td>
+			                                    <td>{{$mc->created_at}}</td>
+			                                    <td class="td-actions text-right">
+			                                   		{{-- <button type="button" rel="tooltip" class="btn btn-warning btn-round" title="Preview">
+			                                            <i class="material-icons">visibility</i>
+			                                        </button> --}}
+			                                        <a href="/pdf/{{$mc->id}}.pdf" target="_blank" type="button" rel="tooltip" class="btn btn-info btn-round" title="download">
+			                                            <i class="material-icons">file_download</i>
+			                                        </a>
+			                                        <a type="button" rel="tooltip" class="btn btn-success btn-round" title="share">
+			                                            <i class="material-icons">share</i>
+			                                        </a>
+			                                        {{-- <button type="button" rel="tooltip" class="btn btn-danger btn-round" title="remove">
+			                                            <i class="material-icons">close</i>
+			                                        </button>--}}<!--content for id mcstatus ends here-->
+			                                    </td>
+			                                </tr>	
+		                               	@endforeach	         		                               
+		                            </tbody>
+		                    	    </table>
+		                    	    </div>
 								</div>
-								</div>
-								</div>
+							</div>
+						</div>
+
+						@endif
+					</div>
 
 
 
 			    	<!--seeandactstatus starts-->
 			        <div class="tab-pane connections" id="seeandactstatus">
 
-			        			<p style="text-align: center">test</p>
+			        			<p style="text-align: center"></p>
 
             		</div><!--seeandactstatus ends-->
             		</div><!--tab content ends-->

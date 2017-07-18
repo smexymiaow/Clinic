@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Session;
+use App\Session as ss;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -67,9 +67,14 @@ class SessionController extends Controller
      * @param  \App\Session  $session
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Session $session)
+    public function update(Request $request,$session)
     {
-        //
+        $param = $request->all();
+        $session = ss::find($session);
+        $session->approval = 1;
+        $session->save();
+        
+        return back();
     }
 
     /**
