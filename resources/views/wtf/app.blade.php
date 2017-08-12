@@ -40,24 +40,13 @@
 									<div class="form-group label-floating">
                                         <label class="control-label"></label><!-- markup -->
                                         {{ Form::label('booking_date', 'Select date', ['class' => 'control-label']) }}
-                                        {{ Form::date('booking_date', Null,['class' => 'form-control']) }}
+                                        {{ Form::date('booking_date', Null,['class' => 'form-control pbookingdate']) }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
 									<div class="form-group label-floating">
                                         <label class="control-label">Select time</label>
-                                        <select class="selectpicker" name="booking_time">
-                                            <option value="8AM">8AM</option>
-                                            <option value="9AM">9AM</option>
-                                            <option value="10AM">10AM</option>
-                                            <option value="11AM">11AM</option>
-                                            <option value="12PM">12PM</option>
-                                            <option value="1PM">1PM</option>
-                                            <option value="2PM">2PM</option>
-                                            <option value="3PM">3PM</option>
-                                            <option value="4PM">4PM</option>
-                                            <option value="5PM">5PM</option>
-                                            <option value="6PM">6PM</option>
+                                        <select class="selectpicker" name="booking_time" id="bookingtimeselect">
                                         </select>
                                     </div>
                                 </div>

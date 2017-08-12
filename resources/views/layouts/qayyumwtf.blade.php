@@ -18,6 +18,7 @@
 </head>
 <body> <!-- Body Start Here -->
 <!--Top NavBar Starts Here-->
+@include('layouts.notification')
 <div class="navbar navbar-inverse">
 	<div class="container">
 	    <div class="navbar-header">
@@ -123,6 +124,32 @@
 			$('#mcpunyeform').submit();	
 		});
 		
+
+		$('.pbookingdate').change(function() {
+			// $( this ).val();
+			$.get("/api/bookingtime/"+$( this ).val(), function(data, status){
+		        console.log("Data: " + data + "\nStatus: " + status);
+		        console.dir(data);
+		        var result = Object.keys(data).map(function(key) {
+				  return [Number(key), data[key]];
+				});
+				var select = document.getElementById('bookingtimeselect');
+				$('#bookingtimeselect').empty();//.find('option').remove().end();
+				for (var i = 0; i<result.length; i++){
+				    var opt = document.createElement('option');
+				    var resulttostring = result[i]+'';
+				    var curvalue = resulttostring.split(",");
+				    opt.value = curvalue[1];
+				    opt.innerHTML = curvalue[1];
+				    select.appendChild(opt);
+				}
+				$('.selectpicker').selectpicker('refresh');
+		    });
+		});
+		// update our time available
+		function updateAb(value){     
+			console.log(value);  
+		}
                 
 	</script>
 </body>

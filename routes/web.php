@@ -35,3 +35,7 @@ Route::resource('appointment','AppointmentController');
 Route::resource('session','SessionController');
 Route::resource('mc','MedicalCertificateController');
 Route::post('/send', 'EmailController@send');
+
+
+// Api 
+Route::get('api/bookingtime/{date}','ApiController@timeselect');

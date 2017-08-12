@@ -67,8 +67,13 @@ class HomeController extends Controller
         
     public function app (Request $request){
         $parameters = $request->all();
+        if (Auth::guest()) {
+            return back()->withErrors(['Ouch!! You haven\'t log in to our system. ']);;
+        }
         $has_appointment = Appointment::where('user_id',Auth::user()->id)->whereDate('booking_date', '>', Carbon::today()->toDateString())->get();
         $doneappointment = $has_appointment->isEmpty();
+
+        // dd($doneappointment);
         return view('wtf.app',compact('doneappointment'));
     }
         
